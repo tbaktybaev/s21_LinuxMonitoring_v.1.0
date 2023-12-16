@@ -10,6 +10,5 @@ if [ "$#" -ne 4]; then
 fi
 
 # Вызов функций
-get_general_info
 get_system_info
 display_info "$@"
