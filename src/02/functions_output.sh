@@ -23,7 +23,8 @@ save_to_file() {
     read -p "Хотите сохранить данные в файл? (Y/N): " answer
     if [ "$answer" == "Y" ] || [ "$answer" == "y" ]; then
         filename=$(date +"%d_%m_%y_%H_%M_%S.status")
-        # echo -e "HOSTNAME = $HOSTNAME\n
+        # echo -e "\n
+        #          HOSTNAME = $HOSTNAME\n
         #          TIMEZONE = $TIMEZONE\n
         #          USER = $USER\n
         #          OS = $OS\n
