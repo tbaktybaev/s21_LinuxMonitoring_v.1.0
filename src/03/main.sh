@@ -3,6 +3,8 @@ source ../02/functions_system.sh
 source functions_output.sh
 source functions_transform.sh
 
+check_parameter
+
 # Чтение параметров
 bg_hostname=$(map_color "$1")
 font_hostname=$(map_color "$2")
