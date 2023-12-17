@@ -1,39 +1,5 @@
-# #!/bin/bash
-
-# # Включение файлов с функциями
-# source ../02/functions_output.sh
-# source functions_output.sh
-
-# if [ "$#" -ne 4 ]; then
-#     echo "Usage: $0 <bg_color_names> <font_color_names> <bg_color_values> <font_color_values>"
-#     exit 1
-# fi
-
-# # Вызов функций
-# get_system_info
-# display_info "$@"
-
 #!/bin/bash
-
-# Функция для получения системной информации
-get_system_info() {
-    HOSTNAME=$(hostname)
-    TIMEZONE=$(timedatectl | awk '/Time zone/ {print $3, "UTC"}')
-    USER=$(whoami)
-    OS=$(cat /etc/os-release | grep PRETTY_NAME | cut -d '"' -f 2)
-    DATE=$(date +"%d %b %Y %T")
-    UPTIME=$(uptime -p)
-    UPTIME_SEC=$(cat /proc/uptime | awk '{print $1}')
-    IP=$(ip -4 addr show scope global | grep inet | awk '{print $2}' | cut -d'/' -f1)
-    MASK=$(ipcalc $(ip route | grep default | awk '{print $3}') | grep Netmask | awk '{print $2}')
-    GATEWAY=$(ip route | grep default | awk '{print $3}')
-    RAM_TOTAL=$(free -h | awk '/^Mem/ {printf "%.3f GB\n", $2/1024}')
-    RAM_USED=$(free -h | awk '/^Mem/ {printf "%.3f GB\n", $3/1024}')
-    RAM_FREE=$(free -h | awk '/^Mem/ {printf "%.3f GB\n", $4/1024}')
-    SPACE_ROOT=$(df -BM / | awk 'NR==2 {printf "%.2f MB\n", $2}')
-    SPACE_ROOT_USED=$(df -BM / | awk 'NR==2 {printf "%.2f MB\n", $3}')
-    SPACE_ROOT_FREE=$(df -BM / | awk 'NR==2 {printf "%.2f MB\n", $4}')
-}
+source ../02/functions_system
 
 # Функция для вывода цветного текста
 print_colored_text() {
@@ -65,18 +31,33 @@ fi
 get_system_info
 
 # Вывод информации с учетом цветов
-print_colored_text "HOSTNAME = $HOSTNAME" "$bg_hostname" "$font_hostname"
-print_colored_text "TIMEZONE = $TIMEZONE" "$bg_values" "$font_values"
-print_colored_text "USER = $USER" "$bg_hostname" "$font_hostname"
-print_colored_text "OS = $OS" "$bg_values" "$font_values"
-print_colored_text "DATE = $DATE" "$bg_hostname" "$font_hostname"
-print_colored_text "UPTIME = $UPTIME" "$bg_values" "$font_values"
-print_colored_text "IP = $IP" "$bg_hostname" "$font_hostname"
-print_colored_text "MASK = $MASK" "$bg_values" "$font_values"
-print_colored_text "GATEWAY = $GATEWAY" "$bg_hostname" "$font_hostname"
-print_colored_text "RAM_TOTAL = $RAM_TOTAL" "$bg_values" "$font_values"
-print_colored_text "RAM_USED = $RAM_USED" "$bg_hostname" "$font_hostname"
-print_colored_text "RAM_FREE = $RAM_FREE" "$bg_values" "$font_values"
-print_colored_text "SPACE_ROOT = $SPACE_ROOT" "$bg_hostname" "$font_hostname"
-print_colored_text "SPACE_ROOT_USED = $SPACE_ROOT_USED" "$bg_values" "$font_values"
-print_colored_text "SPACE_ROOT_FREE = $SPACE_ROOT_FREE" "$bg_hostname" "$font_hostname"
+print_colored_text "HOSTNAME: " "$bg_hostname" "$font_hostname"
+print_colored_text "$HOSTNAME" "$bg_values" "$font_values"
+print_colored_text "TIMEZONE: " "$bg_hostname" "$font_hostname"
+print_colored_text "$TIMEZONE" "$bg_values" "$font_values"
+print_colored_text "USER: " "$bg_hostname" "$font_hostname"
+print_colored_text "$USER" "$bg_values" "$font_values"
+print_colored_text "OS: " "$bg_hostname" "$font_hostname"
+print_colored_text "$OS" "$bg_values" "$font_values"
+print_colored_text "DATE: " "$bg_hostname" "$font_hostname"
+print_colored_text "$DATE" "$bg_values" "$font_values"
+print_colored_text "UPTIME: " "$bg_hostname" "$font_hostname"
+print_colored_text "$UPTIME" "$bg_values" "$font_values"
+print_colored_text "IP: " "$bg_hostname" "$font_hostname"
+print_colored_text "$IP" "$bg_values" "$font_values"
+print_colored_text "MASK: " "$bg_hostname" "$font_hostname"
+print_colored_text "$MASK" "$bg_values" "$font_values"
+print_colored_text "GATEWAY: " "$bg_hostname" "$font_hostname"
+print_colored_text "$GATEWAY" "$bg_values" "$font_values"
+print_colored_text "RAM_TOTAL: " "$bg_hostname" "$font_hostname"
+print_colored_text "$RAM_TOTAL" "$bg_values" "$font_values"
+print_colored_text "RAM_USED: " "$bg_hostname" "$font_hostname"
+print_colored_text "$RAM_USED" "$bg_values" "$font_values"
+print_colored_text "RAM_FREE: " "$bg_hostname" "$font_hostname"
+print_colored_text "$RAM_FREE" "$bg_values" "$font_values"
+print_colored_text "SPACE_ROOT: " "$bg_hostname" "$font_hostname"
+print_colored_text "$SPACE_ROOT" "$bg_values" "$font_values"
+print_colored_text "SPACE_ROOT_USED: " "$bg_hostname" "$font_hostname"
+print_colored_text "$SPACE_ROOT_USED" "$bg_values" "$font_values"
+print_colored_text "SPACE_ROOT_FREE: " "$bg_hostname" "$font_hostname"
+print_colored_text "$SPACE_ROOT_FREE" "$bg_values" "$font_values"
