@@ -26,10 +26,15 @@ font_hostname=$(map_color "${column1_font_color:-$default_column1_font_color}")
 bg_values=$(map_color "${column2_background:-$default_column2_background}")
 font_values=$(map_color "${column2_font_color:-$default_column2_font_color}")
 
-bg_1=${column1_background:-$default_column1_background}
-ft_1=${column1_font_color:-$default_column1_font_color}
-bg_2=${column2_background:-$default_column2_background}
-ft_2=${column2_font_color:-$default_column2_font_color}
+bg_1=${column1_background:-default_column1_background}
+ft_1=${column1_font_color:-default_column1_font_color}
+bg_2=${column2_background:-default_column2_background}
+ft_2=${column2_font_color:-default_column2_font_color}
+
+bg_1_def=${column1_background:-default}
+ft_1_def=${column1_font_color:-default}
+bg_2_def=${column2_background:-default}
+ft_2_def=${column2_font_color:-default}
 
 # Вызов функции для получения системной информации
 get_system_info
