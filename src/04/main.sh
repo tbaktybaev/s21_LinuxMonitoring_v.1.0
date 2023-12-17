@@ -31,7 +31,7 @@
 # Подключение модулей
 source config.sh
 source colors.sh
-source system_info.sh
+source ../02/functions_system.sh
 
 # Чтение конфигурационного файла
 read_config "config.conf"
