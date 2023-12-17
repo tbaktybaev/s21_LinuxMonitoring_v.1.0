@@ -26,10 +26,16 @@ font_hostname=${column1_font_color:-$default_column1_font_color}
 bg_values=${column2_background:-$default_column2_background}
 font_values=${column2_font_color:-$default_column2_font_color}
 
+bg_1=${column1_background:-$default_column1_background}
+ft_1=${column1_font_color:-$default_column1_font_color}
+bg_2=${column2_background:-$default_column2_background}
+ft_2=${column2_font_color:-$default_column2_font_color}
+
 echo $bg_hostname
 echo $font_hostname
 echo $bg_values
 echo $font_values
+
 # Чтение параметров
 bg_hostname=$(map_color "$bg_hostname")
 font_hostname=$(map_color "$font_hostname")
