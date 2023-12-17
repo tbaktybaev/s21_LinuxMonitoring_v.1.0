@@ -6,7 +6,7 @@ source ../03/functions_transform.sh
 source colors.sh
 source functions_output.sh
 
-config_file="./config.conf"
+config_file="config.conf"
 
 # Проверка наличия конфигурационного файла
 if [ ! -f "$config_file" ]; then
