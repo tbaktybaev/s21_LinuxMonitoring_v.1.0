@@ -21,31 +21,15 @@ default_column2_background=4
 default_column2_font_color=1
 
 # Проверка заданности параметров и использование значений по умолчанию при необходимости
-bg_hostname=${column1_background:-$default_column1_background}
-font_hostname=${column1_font_color:-$default_column1_font_color}
-bg_values=${column2_background:-$default_column2_background}
-font_values=${column2_font_color:-$default_column2_font_color}
+bg_hostname=$(map_color "${column1_background:-$default_column1_background}")
+font_hostname=$(map_color "${column1_font_color:-$default_column1_font_color}")
+bg_values=$(map_color "${column2_background:-$default_column2_background}")
+font_values=$(map_color "${column2_font_color:-$default_column2_font_color}")
 
 bg_1=${column1_background:-$default_column1_background}
 ft_1=${column1_font_color:-$default_column1_font_color}
 bg_2=${column2_background:-$default_column2_background}
 ft_2=${column2_font_color:-$default_column2_font_color}
-
-echo $bg_hostname
-echo $font_hostname
-echo $bg_values
-echo $font_values
-
-# Чтение параметров
-bg_hostname=$(map_color "$bg_hostname")
-font_hostname=$(map_color "$font_hostname")
-bg_values=$(map_color "$bg_values")
-font_values=$(map_color "$font_values")
-
-echo $bg_hostname
-echo $font_hostname
-echo $bg_values
-echo $font_values
 
 # Вызов функции для получения системной информации
 get_system_info
