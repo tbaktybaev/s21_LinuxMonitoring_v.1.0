@@ -36,10 +36,10 @@ ft_1_def=${column1_font_color:-default}
 bg_2_def=${column2_background:-default}
 ft_2_def=${column2_font_color:-default}
 
-echo $bg_1_def
-echo $ft_1_def
-echo $bg_2_def
-echo $ft_2_def
+echo $bg_1
+echo $ft_1
+echo $bg_2
+echo $ft_2
 
 # Вывод цветовой схемы
 display_color_scheme() {
