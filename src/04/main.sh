@@ -3,6 +3,7 @@
 source ../02/functions_system.sh
 source ../03/functions_output.sh
 source ../03/functions_transform.sh
+source colors.sh
 
 config_file="./config.conf"
 
