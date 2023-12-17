@@ -21,14 +21,15 @@ default_column2_background=4
 default_column2_font_color=1
 
 # Проверка заданности параметров и использование значений по умолчанию при необходимости
-bg_hostname=$(map_color "${column1_background:-$default_column1_background}")
-font_hostname=$(map_color "${column1_font_color:-$default_column1_font_color}")
-bg_values=$(map_color "${column2_background:-$default_column2_background}")
-font_values=$(map_color "${column2_font_color:-$default_column2_font_color}")
-echo column1_background
-echo column1_font_color
-echo column2_background
-echo column2_font_color
+bg_hostname=${column1_background:-$default_column1_background}
+font_hostname=${column1_font_color:-$default_column1_font_color}
+bg_values=${column2_background:-$default_column2_background}
+font_values=${column2_font_color:-$default_column2_font_color}
+
+echo $column1_background
+echo $column1_font_color
+echo $column2_background
+echo $column2_font_color
 
 # Вызов функции для получения системной информации
 get_system_info
