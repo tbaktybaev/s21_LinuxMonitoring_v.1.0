@@ -3,6 +3,7 @@
 
 source ../02/functions_system.sh
 source ../03/functions_output.sh
+
 config_file="config.txt"
 
 # Проверка наличия конфигурационного файла
