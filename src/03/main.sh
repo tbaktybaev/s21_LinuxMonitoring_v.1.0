@@ -3,7 +3,11 @@ source ../02/functions_system.sh
 source functions_output.sh
 source functions_transform.sh
 
-check_parameter "$1" "$2" "$3" "$4"
+# Проверка наличия 4 параметров
+if [ "$#" -ne 4 ]; then
+    echo "Ошибка: Необходимо ввести 4 параметра."
+    exit 1
+fi
 
 # Чтение параметров
 bg_hostname=$(map_color "$1")
