@@ -6,7 +6,7 @@ get_system_info() {
     DATE=$(date +"%d %b %Y %T")
     UPTIME=$(uptime -p)
     UPTIME_SEC=$(cat /proc/uptime | awk '{print $1}')
-    IP=$(ip -4 addr show scope global | grep inet | awk '{print $2}' | cut -d'/' -f1)
+    IP=$(ip -4 addr show dev "enp0s3" | grep inet | awk '{print $2}' | cut -d'/' -f1)
     MASK=$(ipcalc $(ip route | grep default | awk '{print $3}') | grep Netmask | awk '{print $2}')
     GATEWAY=$(ip route | grep default | awk '{print $3}')
     RAM_TOTAL=$(free -h | awk '/^Mem/ {printf "%.3f GB\n", $2/1024}')
