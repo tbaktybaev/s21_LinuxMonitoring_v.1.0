@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Маппинг цветов
-map_color() {
+map_color_scheme() {
     case "$1" in
         1) echo "white" ;;
         2) echo "red" ;;
