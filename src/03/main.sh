@@ -1,5 +1,5 @@
 #!/bin/bash
-source ../02/functions_system
+source ../02/functions_system.sh
 
 # Функция для вывода цветного текста
 print_colored_text() {
