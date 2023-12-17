@@ -27,7 +27,7 @@ bg_values=$3
 font_values=$4
 
 # Проверка на совпадение цветов
-if [ "$bg_hostname" -eq "$bg_values" ] || [ "$font_hostname" -eq "$font_values" ]; then
+if [ "$1" -eq "$2" ] || [ "$3" -eq "$4" ]; then
     echo "Ошибка: Цвета фона и шрифта для одного столбца не должны совпадать."
     exit 1
 fi
