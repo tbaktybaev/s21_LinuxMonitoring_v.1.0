@@ -1,30 +1,31 @@
-# Функция для вывода значений с цветами
-print_colored_value() {
-    local value=$1
-    local font_color=$2
-    local background_color=$3
+# Функция для вывода цветного текста
+print_colored_text() {
+    local text=$1
+    local info=$2
+    local bg_hostname=$3
+    local font_hostname=$4
+    local bg_values=$5
+    local font_values=$6
     local reset_color='\e[0m'
-    local colored_value='\e['"$font_color"';'"$background_color"'m'"$value"$reset_color
 
-    echo -e "$colored_value"
+    printf "\e[48;5;%sm\e[38;5;%sm%-20s\e[0m\e[48;5;%sm\e[38;5;%sm%s\e[0m\n" "$bg_hostname" "$font_hostname" "$text" "$bg_values" "$font_values" "$info"
 }
 
-# Вывод данных с цветами
-display_info() {
-    print_colored_value "HOSTNAME = $HOSTNAME" "$2" "$1"
-    print_colored_value "TIMEZONE = $TIMEZONE" "$4" "$3"
-    print_colored_value "USER = $USER" "$2" "$1"
-    print_colored_value "OS = $OS" "$4" "$3"
-    print_colored_value "DATE = $DATE" "$2" "$1"
-    print_colored_value "UPTIME = $UPTIME" "$4" "$3"
-    print_colored_value "UPTIME_SEC = $UPTIME_SEC" "$2" "$1"
-    print_colored_value "IP = $IP" "$4" "$3"
-    print_colored_value "MASK = $MASK" "$2" "$1"
-    print_colored_value "GATEWAY = $GATEWAY" "$4" "$3"
-    print_colored_value "RAM_TOTAL = $RAM_TOTAL" "$2" "$1"
-    print_colored_value "RAM_USED = $RAM_USED" "$4" "$3"
-    print_colored_value "RAM_FREE = $RAM_FREE" "$2" "$1"
-    print_colored_value "SPACE_ROOT = $SPACE_ROOT" "$4" "$3"
-    print_colored_value "SPACE_ROOT_USED = $SPACE_ROOT_USED" "$2" "$1"
-    print_colored_value "SPACE_ROOT_FREE = $SPACE_ROOT_FREE" "$4" "$3"
+# Вывод информации с учетом цветов
+display_info_colored() {
+    print_colored_text "HOSTNAME = " "$HOSTNAME" "$bg_hostname" "$font_hostname"  "$bg_values" "$font_values"
+    print_colored_text "TIMEZONE = " "$TIMEZONE" "$bg_hostname" "$font_hostname"  "$bg_values" "$font_values"
+    print_colored_text "USER = " "$USER" "$bg_hostname" "$font_hostname"  "$bg_values" "$font_values"
+    print_colored_text "OS = " "$OS" "$bg_hostname" "$font_hostname"  "$bg_values" "$font_values"
+    print_colored_text "DATE = " "$DATE" "$bg_hostname" "$font_hostname"  "$bg_values" "$font_values"
+    print_colored_text "UPTIME = " "$UPTIME" "$bg_hostname" "$font_hostname"  "$bg_values" "$font_values"
+    print_colored_text "IP = " "$IP" "$bg_hostname" "$font_hostname"  "$bg_values" "$font_values"
+    print_colored_text "MASK = " "$MASK" "$bg_hostname" "$font_hostname"  "$bg_values" "$font_values"
+    print_colored_text "GATEWAY = " "$GATEWAY" "$bg_hostname" "$font_hostname"  "$bg_values" "$font_values"
+    print_colored_text "RAM_TOTAL = " "$RAM_TOTAL" "$bg_hostname" "$font_hostname"  "$bg_values" "$font_values"
+    print_colored_text "RAM_USED = " "$RAM_USED" "$bg_hostname" "$font_hostname"  "$bg_values" "$font_values"
+    print_colored_text "RAM_FREE = " "$RAM_FREE" "$bg_hostname" "$font_hostname"  "$bg_values" "$font_values"
+    print_colored_text "SPACE_ROOT = " "$SPACE_ROOT" "$bg_hostname" "$font_hostname"  "$bg_values" "$font_values"
+    print_colored_text "SPACE_ROOT_USED = " "$SPACE_ROOT_USED" "$bg_hostname" "$font_hostname"  "$bg_values" "$font_values"
+    print_colored_text "SPACE_ROOT_FREE = " "$SPACE_ROOT_FREE" "$bg_hostname" "$font_hostname"  "$bg_values" "$font_values"
 }
