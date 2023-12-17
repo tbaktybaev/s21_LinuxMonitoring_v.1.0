@@ -6,17 +6,17 @@ check_parameter() {
     fi
 }
 
-read_and_check_colors() {
-    local bg_hostname=$(map_color "$1")
-    local font_hostname=$(map_color "$2")
-    local bg_values=$(map_color "$3")
-    local font_values=$(map_color "$4")
+# read_and_check_colors() {
+#     local bg_hostname=$(map_color "$1")
+#     local font_hostname=$(map_color "$2")
+#     local bg_values=$(map_color "$3")
+#     local font_values=$(map_color "$4")
 
-    # Проверка на совпадение цветов
-    if [ "$1" -eq "$2" ] || [ "$3" -eq "$4" ]; then
-        echo "Ошибка: Цвета фона и шрифта для одного столбца не должны совпадать."
-        exit 1
-    fi
+#     # Проверка на совпадение цветов
+#     if [ "$1" -eq "$2" ] || [ "$3" -eq "$4" ]; then
+#         echo "Ошибка: Цвета фона и шрифта для одного столбца не должны совпадать."
+#         exit 1
+#     fi
 }
 
 # Маппинг цветов
