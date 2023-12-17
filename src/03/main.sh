@@ -1,7 +1,7 @@
 #!/bin/bash
 source ../02/functions_system.sh
 source functions_output.sh
-source functions_tansform.sh
+source functions_transform.sh
 
 # Проверка наличия 4 параметров
 if [ "$#" -ne 4 ]; then
