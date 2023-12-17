@@ -7,6 +7,7 @@ source colors.sh
 source functions_output.sh
 
 config_file="config.conf"
+default="default.conf"
 
 # Проверка наличия конфигурационного файла
 if [ ! -f "$config_file" ]; then
@@ -14,11 +15,7 @@ if [ ! -f "$config_file" ]; then
     exit 1
 fi
 source "$config_file"
-
-default_column1_background=4
-default_column1_font_color=1
-default_column2_background=4
-default_column2_font_color=1
+source "$default"
 
 # Проверка заданности параметров и использование значений по умолчанию при необходимости
 bg_hostname=$(map_color "${column1_background:-$default_column1_background}")
