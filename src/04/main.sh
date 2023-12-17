@@ -1,8 +1,8 @@
 #!/bin/bash
 
-
 source ../02/functions_system.sh
 source ../03/functions_output.sh
+source ../03/functions_tansform.sh
 
 config_file="./config.txt"
 
@@ -19,10 +19,10 @@ default_column2_background=4
 default_column2_font_color=15
 
 # Проверка заданности параметров и использование значений по умолчанию при необходимости
-bg_hostname=${column1_background:-$default_column1_background}
-font_hostname=${column1_background:-$default_column1_font_color}
-bg_values=${column1_background:-$default_column2_background}
-font_values=${column1_background:-$default_column2_font_color}
+bg_hostname=$(map_color "${column1_background:-$default_column1_background}")
+font_hostname=$(map_color "${column1_background:-$default_column1_font_color}")
+bg_values=$(map_color "${column1_background:-$default_column2_background}")
+font_values=$(map_color "${column1_background:-$default_column2_font_color}")
 
 # Вызов функции для получения системной информации
 get_system_info

@@ -1,25 +1,13 @@
 #!/bin/bash
 source ../02/functions_system.sh
 source functions_output.sh
+source functions_tansform.sh
 
 # Проверка наличия 4 параметров
 if [ "$#" -ne 4 ]; then
     echo "Ошибка: Необходимо ввести 4 параметра."
     exit 1
 fi
-
-# Маппинг цветов
-map_color() {
-    case "$1" in
-        1) echo 15 ;;  # белый
-        2) echo 1 ;;   # красный
-        3) echo 2 ;;   # зеленый
-        4) echo 4 ;;   # синий
-        5) echo 5 ;;   # черный
-        6) echo 0 ;;
-        *) echo "Ошибка: Недопустимый цвет." ;;
-    esac
-}
 
 # Чтение параметров
 bg_hostname=$(map_color "$1")
