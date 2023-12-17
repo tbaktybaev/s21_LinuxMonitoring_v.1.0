@@ -1,16 +1,16 @@
 #!/bin/bash
 
-config_file = "config.txt"
 
 source ../02/functions_system.sh
 source ../03/functions_output.sh
-source "$config_file"
+config_file = "config.txt"
 
 # Проверка наличия конфигурационного файла
 if [ ! -f "$config_file" ]; then
     echo "Ошибка: Конфигурационный файл ($config_file) не найден."
     exit 1
 fi
+source "$config_file"
 
 default_column1_background=4
 default_column1_font_color=15
