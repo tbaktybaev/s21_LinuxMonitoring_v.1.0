@@ -9,10 +9,10 @@ if [ "$#" -ne 4 ]; then
 fi
 
 # Чтение параметров
-bg_hostname=$1
-font_hostname=$2
-bg_values=$3
-font_values=$4
+bg_hostname=$1-1
+font_hostname=$2-1
+bg_values=$3-1
+font_values=$4-1
 
 # Проверка на совпадение цветов
 if [ "$1" -eq "$2" ] || [ "$3" -eq "$4" ]; then
