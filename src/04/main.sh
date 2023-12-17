@@ -30,7 +30,7 @@ get_system_info
 display_info_colored
 
 # Вывод цветовой схемы
-echo -e "\nColumn 1 background = $(map_color_scheme "$bg_hostname")"
-echo "Column 1 font color = $(map_color_scheme "$font_hostname")"
-echo "Column 2 background = $(map_color_scheme "$bg_values")"
-echo "Column 2 font color = $(map_color_scheme "$font_values")"
+echo -e "\nColumn 1 background = $bg_hostname ($(map_color_scheme "$bg_hostname"))"
+echo "Column 1 font color = $font_hostname $(map_color_scheme "$font_hostname")"
+echo "Column 2 background = $bg_values $(map_color_scheme "$bg_values")"
+echo "Column 2 font color = $font_values $(map_color_scheme "$font_values")"
