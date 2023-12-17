@@ -3,6 +3,14 @@ source ../02/functions_system.sh
 source functions_output.sh
 source functions_transform.sh
 
+# Проверка наличия 4 параметров
+check_parameter() {
+    if [ "$#" -ne 4 ]; then
+        echo "Ошибка: Необходимо ввести 4 параметра."
+        exit 1
+    fi
+}
+
 check_parameter
 
 # Чтение параметров
