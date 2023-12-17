@@ -11,9 +11,8 @@ print_colored_text() {
     local font_values=$6
     local reset_color='\e[0m'
 
-    echo -e "\e[48;5;${bg_hostname}m\e[38;5;${font_hostname}m${text}\e[48;5;${bg_values}m\e[38;5;${font_values}m ${info} ${reset_color}"
+    printf "\e[48;5;%sm\e[38;5;%sm%-20s\e[0m\e[48;5;%sm\e[38;5;%sm%s\e[0m\n" "$bg_hostname" "$font_hostname" "$text" "$bg_values" "$font_values" "$info"
 }
-
 # Проверка наличия 4 параметров
 if [ "$#" -ne 4 ]; then
     echo "Ошибка: Необходимо ввести 4 параметра."
