@@ -18,7 +18,7 @@ calculate_dir_size() {
 }
 
 # Function to calculate the MD5 hash of a file
-calculate_md5() {
+get_md5() {
     md5sum "$1" | cut -d' ' -f1
 }
 
@@ -48,7 +48,7 @@ top_executables=$(find "$dir_path" -type f -executable -exec du -h {} + | sort -
 # Calculate script execution time
 end_time=$(date +%s.%N)
 execution_time=$(echo "$end_time - $start_time" | bc)
-top_executables_with_md5=$(find "$dir_path" -type f -executable -exec bash -c 'calculate_md5 "$0" && echo " $0"' {} \; | sort -nr | head -n 10)
+top_executables_with_md5=$(find "$dir_path" -type f -executable -exec bash -c 'get_md5 "$0" && echo " $0"' {} \; | sort -nr | head -n 10)
 
 # Print the results
 echo "Total number of folders (including all nested ones) = $total_folders"
