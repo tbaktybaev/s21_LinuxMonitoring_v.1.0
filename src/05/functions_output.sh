@@ -24,7 +24,7 @@ symbolic_links=$(find "$directory" -type l | wc -l)
 top_files=$(du -h "$directory"/* | sort -rh | head -n 10)
 
 # Топ 10 исполняемых файлов с хешем
-top_executables=$(sudo find /var/log  -type f -exec file {} \; | grep exe | sort -k5 -rh | head -n 10)
+top_executables=$(find "$directory" -type f -exec file {} \; | grep "exe" | sort -k5 -rh | head -n 10)
 
 # Рассчитываем время выполнения скрипта
 end_time=$(date +%s.%N)
