@@ -20,9 +20,6 @@ log_files=$(find "$directory" -type f -name "*.log" | wc -l)
 archive_files=$(find "$directory" -type f -exec file {} \; | grep -c "archive")
 symbolic_links=$(find "$directory" -type l | wc -l)
 
-# Топ 10 файлов с самым большим весом
-top_files=$(du -h "$directory"/* | sort -rh | head -n 11)
-
 # Топ 10 исполняемых файлов с хешем
 top_executables=$(find "$directory" -type f -exec file {} \; | grep "executable" | sort -k5 -rh | head -n 11)
 
@@ -46,7 +43,7 @@ echo "TOP 10 files of maximum size arranged in descending order (path, size and 
 echo "$top_files" | awk '{printf "%d - %s, %s, %s\n", NR, $2, $1, $NF}'
 echo "TOP 10 executable files of the maximum size arranged in descending order (path, size and MD5 hash of file)"
 while IFS= read -r line; do
-    path=$(echo "$line" | awk '{print $1}')
+    path=$(echo "$line" | awk -F: '{print $1}')
     size=$(echo "$line" | awk '{print $3}')
     hash=$(md5sum "$path" | awk '{print $1}')
     printf "%s - %s, %s, %s\n" "$(basename "$path")" "$size" "$hash"
