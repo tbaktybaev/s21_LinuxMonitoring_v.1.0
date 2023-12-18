@@ -43,14 +43,8 @@ echo "Log files (with the extension .log) = $log_files"
 echo "Archive files = $archive_files"
 echo "Symbolic links = $symbolic_links"
 echo "TOP 10 files of maximum size arranged in descending order (path, size and type):"
-counter=1
-while IFS= read -r line; do
-    path=$(echo "$line" | awk '{print $2}')
-    size=$(echo "$line" | awk '{print $1}')
-    type=$(file -b --mime-type "$path")
-    printf "%d - %s, %s, %s\n" "$counter" "$path" "$size" "$type"
-    ((counter++))
-done <<< "$top_files"echo "TOP 10 executable files of the maximum size arranged in descending order (path, size and MD5 hash of file)"
+echo "$top_files" | awk '{printf "%d - %s, %s, %s\n", NR, $2, $1, $NF}'
+echo "TOP 10 executable files of the maximum size arranged in descending order (path, size and MD5 hash of file)"
 while IFS= read -r line; do
     path=$(echo "$line" | awk '{print $1}')
     size=$(echo "$line" | awk '{print $3}')
