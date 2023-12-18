@@ -26,7 +26,7 @@ calculate_md5() {
 total_folders=$(find "$dir_path" -type d | wc -l)
 
 # Top 5 folders with the maximum size
-top_folders=$(du -h --max-depth=1 "$dir_path" | sort -rh | head -n 6)
+top_folders=$(du -h --max-depth=1 "$dir_path" | sort -rh | head -n 5)
 
 # Total number of files
 total_files=$(find "$dir_path" -type f | wc -l)
@@ -48,6 +48,7 @@ top_executables=$(find "$dir_path" -type f -executable -exec du -h {} + | sort -
 # Calculate script execution time
 end_time=$(date +%s.%N)
 execution_time=$(echo "$end_time - $start_time" | bc)
+top_executables_with_md5=$(find "$dir_path" -type f -executable -exec bash -c 'calculate_md5 "$0" && echo " $0"' {} \; | sort -nr | head -n 10)
 
 # Print the results
 echo "Total number of folders (including all nested ones) = $total_folders"
@@ -64,5 +65,5 @@ echo "Symbolic links = $symbolic_links"
 echo "TOP 10 files of maximum size arranged in descending order (path, size and type):"
 echo "$top_files" | awk '{print NR, "-", $2, $1, $3}'
 echo "TOP 10 executable files of maximum size arranged in descending order (path, size and MD5 hash)"
-echo "$top_executables" | awk '{md5 = system("calculate_md5 \"" $2 "\""); print NR, "-", $2, $1, md5}'
+echo "$top_executables_with_md5" | awk '{print NR, "-", $2, $1, $3}'
 echo "Script execution time (in seconds) = $execution_time"
