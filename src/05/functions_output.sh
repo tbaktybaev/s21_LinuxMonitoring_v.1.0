@@ -45,7 +45,7 @@ echo "Symbolic links = $symbolic_links"
 echo "TOP 10 files of maximum size arranged in descending order (path, size and type):"
 echo "$top_files" | awk '{printf "%d - %s, %s, %s\n", NR, $2, $1, $NF}'
 echo "TOP 10 executable files of the maximum size arranged in descending order (path, size and MD5 hash of file)"
-while read -r line; do
+while IFS= read -r line; do
     path=$(echo "$line" | awk '{print $1}')
     size=$(echo "$line" | awk '{print $3}')
     hash=$(md5sum "$path" | awk '{print $1}')
