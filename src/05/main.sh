@@ -1,59 +1,54 @@
 #!/bin/bash
 
-# Check if the correct number of arguments is provided
-if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <directory_path>"
+# Проверка наличия аргумента
+if [ $# -eq 0 ]; then
+    echo "Please provide a directory path as an argument."
     exit 1
 fi
 
-# Capture the start time
+# Получаем путь к директории из аргумента
+directory="$1"
+
+# Проверка существования директории
+if [ ! -d "$directory" ]; then
+    echo "The specified directory does not exist."
+    exit 1
+fi
+
+# Начало отсчета времени выполнения скрипта
 start_time=$(date +%s.%N)
 
-# Directory path provided as argument
-dir_path="$1"
+# Общее число папок (включая вложенные)
+total_folders=$(find "$directory" -type d | wc -l)
 
-# Function to calculate the size of a directory
-calculate_dir_size() {
-    du -sb "$1" | cut -f1
-}
+# Топ 5 папок с самым большим весом
+top_folders=$(du -h --max-depth=1 "$directory" | sort -rh | head -n 6)
 
-# Function to calculate the MD5 hash of a file
-get_md5() {
-    md5sum "$1" | cut -d' ' -f1
-}
+# Общее число файлов
+total_files=$(find "$directory" -type f | wc -l)
 
-# Total number of folders (including all nested ones)
-total_folders=$(find "$dir_path" -type d | wc -l)
+# Число файлов по типам
+config_files=$(find "$directory" -type f -name "*.conf" | wc -l)
+text_files=$(find "$directory" -type f -exec file {} \; | grep -c "text")
+executable_files=$(find "$directory" -type f -exec file {} \; | grep -c "executable")
+log_files=$(find "$directory" -type f -name "*.log" | wc -l)
+archive_files=$(find "$directory" -type f -exec file {} \; | grep -c "archive")
+symbolic_links=$(find "$directory" -type l | wc -l)
 
-# Top 5 folders with the maximum size
-top_folders=$(du -h --max-depth=1 "$dir_path" | sort -rh | head -n 5)
+# Топ 10 файлов с самым большим весом
+top_files=$(du -h "$directory"/* | sort -rh | head -n 11)
 
-# Total number of files
-total_files=$(find "$dir_path" -type f | wc -l)
+# Топ 10 исполняемых файлов с хешем
+top_executables=$(find "$directory" -type f -exec file {} \; | grep "executable" | sort -k5 -rh | head -n 11)
 
-# Number of specific file types
-config_files=$(find "$dir_path" -type f -name "*.conf" | wc -l)
-text_files=$(find "$dir_path" -type f -exec file {} \; | grep "text" | wc -l)
-executable_files=$(find "$dir_path" -type f -executable | wc -l)
-log_files=$(find "$dir_path" -type f -name "*.log" | wc -l)
-archive_files=$(find "$dir_path" -type f \( -name "*.zip" -o -name "*.tar" -o -name "*.gz" \) | wc -l)
-symbolic_links=$(find "$dir_path" -type l | wc -l)
-
-# Top 10 files with the maximum size
-top_files=$(find "$dir_path" -type f -exec du -h {} + | sort -rh | head -n 11)
-
-# Top 10 executable files with the maximum size and MD5 hash
-top_executables=$(find "$dir_path" -type f -executable -exec du -h {} + | sort -rh | head -n 11)
-
-# Calculate script execution time
+# Рассчитываем время выполнения скрипта
 end_time=$(date +%s.%N)
 execution_time=$(echo "$end_time - $start_time" | bc)
-top_executables_with_md5=$(find "$dir_path" -type f -executable -exec bash -c 'get_md5 "$0" && echo " $0"' {} \; | sort -nr | head -n 10)
 
-# Print the results
+# Выводим результаты
 echo "Total number of folders (including all nested ones) = $total_folders"
 echo "TOP 5 folders of maximum size arranged in descending order (path and size):"
-echo "$top_folders" | awk '{print NR, "-", $2, $1}'
+echo "$top_folders" | awk '{printf "%d - %s, %s\n", NR, $2, $1}'
 echo "Total number of files = $total_files"
 echo "Number of:"
 echo "Configuration files (with the .conf extension) = $config_files"
@@ -63,7 +58,12 @@ echo "Log files (with the extension .log) = $log_files"
 echo "Archive files = $archive_files"
 echo "Symbolic links = $symbolic_links"
 echo "TOP 10 files of maximum size arranged in descending order (path, size and type):"
-echo "$top_files" | awk '{print NR, "-", $2, $1, $3}'
-echo "TOP 10 executable files of maximum size arranged in descending order (path, size and MD5 hash)"
-echo "$top_executables_with_md5" | awk '{print NR, "-", $2, $1, $3}'
+echo "$top_files" | awk '{printf "%d - %s, %s, %s\n", NR, $2, $1, $NF}'
+echo "TOP 10 executable files of the maximum size arranged in descending order (path, size and MD5 hash of file)"
+while read -r line; do
+    path=$(echo "$line" | awk '{print $1}')
+    size=$(echo "$line" | awk '{print $3}')
+    hash=$(md5sum "$path" | awk '{print $1}')
+    printf "%s - %s, %s, %s\n" "$(basename "$path")" "$size" "$hash"
+done <<< "$top_executables"
 echo "Script execution time (in seconds) = $execution_time"
